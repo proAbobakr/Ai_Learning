@@ -1,0 +1,103 @@
+# Apple Documentation Crawler Configuration
+
+crawler:
+  base_url: "https://developer.apple.com/documentation/"
+
+  # Rate limiting to be respectful
+  delay_between_requests: 2  # seconds
+  max_retries: 3
+  timeout: 30
+
+  # User agent to identify our crawler
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+
+  # Maximum depth for crawling
+  max_depth: 3
+
+  # Maximum pages per category
+  max_pages_per_category: 100
+
+# Categories to crawl
+categories:
+  - name: "iOS"
+    url_pattern: "ios"
+    description: "iOS SDK and frameworks"
+
+  - name: "SwiftUI"
+    url_pattern: "swiftui"
+    description: "SwiftUI framework for building user interfaces"
+
+  - name: "UIKit"
+    url_pattern: "uikit"
+    description: "UIKit framework for iOS apps"
+
+  - name: "Foundation"
+    url_pattern: "foundation"
+    description: "Foundation framework - core functionality"
+
+  - name: "Swift"
+    url_pattern: "swift"
+    description: "Swift programming language"
+
+  - name: "Combine"
+    url_pattern: "combine"
+    description: "Combine framework for reactive programming"
+
+  - name: "CoreData"
+    url_pattern: "coredata"
+    description: "Core Data framework for data persistence"
+
+  - name: "ARKit"
+    url_pattern: "arkit"
+    description: "Augmented Reality framework"
+
+  - name: "macOS"
+    url_pattern: "macos"
+    description: "macOS SDK and frameworks"
+
+  - name: "watchOS"
+    url_pattern: "watchos"
+    description: "watchOS SDK for Apple Watch"
+
+# Output configuration
+output:
+  human_readable:
+    format: "markdown"
+    include_diagrams: true
+    include_examples: true
+    include_toc: true
+
+  llm_format:
+    format: "json"
+    chunk_size: 2000  # characters per chunk for optimal LLM processing
+    include_metadata: true
+    include_relationships: true
+
+# LLM Configuration (for generating explanations)
+llm:
+  # Set to true if you want to use local LLM for generating explanations
+  use_local: false
+  model: "gpt-3.5-turbo"  # or your local model
+
+  # Prompts for different types of content
+  prompts:
+    explanation: "Explain the following Apple API documentation in simple terms, suitable for developers learning iOS development:"
+    example: "Provide a practical code example for the following Apple API documentation:"
+    summary: "Provide a concise summary of the following documentation:"
+
+# Visualization settings
+visualization:
+  enable_charts: true
+  enable_diagrams: true
+
+  # Chart types to generate
+  charts:
+    - category_distribution
+    - api_complexity
+    - framework_relationships
+
+  # Diagram types
+  diagrams:
+    - class_hierarchy
+    - framework_architecture
+    - api_flow
