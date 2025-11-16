@@ -1,0 +1,42 @@
+crawler:
+  base_url: "https://docs.flutter.dev/"
+  max_depth: 5
+  delay_between_requests: 1.0
+  timeout: 30
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+categories:
+  - name: "Getting Started"
+    keywords: ["get started", "install", "setup", "first app", "introduction"]
+  - name: "Widgets"
+    keywords: ["widget", "stateless", "stateful", "layout", "ui"]
+  - name: "State Management"
+    keywords: ["state", "provider", "bloc", "riverpod", "redux"]
+  - name: "Navigation"
+    keywords: ["navigation", "route", "navigator", "routing"]
+  - name: "Networking"
+    keywords: ["http", "api", "rest", "network", "fetch"]
+  - name: "Persistence"
+    keywords: ["database", "storage", "shared preferences", "sqlite", "hive"]
+  - name: "Animation"
+    keywords: ["animation", "tween", "animated", "motion"]
+  - name: "Testing"
+    keywords: ["test", "unit test", "widget test", "integration test"]
+  - name: "Deployment"
+    keywords: ["build", "release", "deploy", "publish"]
+  - name: "Platform Integration"
+    keywords: ["platform", "native", "channel", "plugin"]
+  - name: "Performance"
+    keywords: ["performance", "optimization", "profiling"]
+  - name: "Architecture"
+    keywords: ["architecture", "pattern", "mvvm", "clean"]
+
+output:
+  human_readable:
+    format: "markdown"
+    include_diagrams: true
+    include_code_highlighting: true
+  llm_format:
+    format: "plain_text"
+    max_chunk_size: 4000
+    include_metadata: true
