@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# Crawler state and results
+crawler/crawler_state.json
+crawler/last_crawl_results.json
+
+# Downloaded documents
+../data/crawled_docs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Logs
+*.log
+crawler.log
+
+# n8n data (if running locally)
+.n8n/
+
+# OS files
+.DS_Store
+Thumbs.db

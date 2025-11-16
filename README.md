@@ -94,6 +94,23 @@ This course is structured as a progressive learning path:
 - **Embeddings**: OpenAI, Sentence Transformers
 - **Document Loaders**: PyPDF2, python-docx, BeautifulSoup
 - **Web Frameworks**: FastAPI, Streamlit (for demos)
+- **Automation**: n8n (workflow automation for weekly updates)
+
+## 🤖 Automated Documentation Updates
+
+**NEW!** This repository includes an automated weekly crawler system that:
+
+- 📅 Runs every Monday at 9 AM via n8n workflow
+- 🔍 Crawls configured RAG documentation URLs
+- 🔔 Detects new and updated content
+- 📧 Sends weekly email reports to your team with:
+  - New documents discovered
+  - Updated documents with changes
+  - Section listings and examples
+  - Crawl statistics
+
+**Quick Start:** See [automation/QUICKSTART.md](automation/QUICKSTART.md) for 5-minute setup
+**Full Documentation:** See [automation/README.md](automation/README.md)
 
 ## 🎓 Learning Outcomes
 

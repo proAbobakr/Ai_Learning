@@ -1,0 +1,190 @@
+{
+  "name": "Weekly RAG Document Crawler",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1,
+              "triggerAtHour": 9,
+              "triggerAtMinute": 0,
+              "triggerAtDayOfWeek": 1
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger - Every Monday 9am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd /home/user/Ai_Learning && python automation/crawler/web_crawler.py automation/crawler/config/crawler_config.json"
+      },
+      "name": "Run Crawler Script",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "filePath": "/home/user/Ai_Learning/automation/crawler/last_crawl_results.json"
+      },
+      "name": "Read Crawl Results",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the crawl results\nconst results = JSON.parse($input.first().json.data.toString());\n\n// Check if there are any updates\nconst hasUpdates = results.new_documents.length > 0 || results.updated_documents.length > 0;\n\n// Format email content\nlet emailBody = `<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n    .header { background: #4CAF50; color: white; padding: 20px; text-align: center; }\n    .content { padding: 20px; }\n    .section { margin-bottom: 30px; }\n    .section-title { color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 5px; }\n    .document { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #4CAF50; }\n    .document-title { font-weight: bold; color: #2196F3; }\n    .document-url { color: #666; font-size: 0.9em; word-break: break-all; }\n    .sections-list { margin-top: 10px; }\n    .sections-list li { margin: 5px 0; }\n    .stats { background: #e3f2fd; padding: 15px; border-radius: 5px; }\n    .stats-item { display: inline-block; margin: 10px 20px 10px 0; }\n    .stats-number { font-size: 24px; font-weight: bold; color: #2196F3; }\n    .footer { background: #f5f5f5; padding: 20px; text-align: center; font-size: 0.9em; color: #666; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold; }\n    .badge-new { background: #4CAF50; color: white; }\n    .badge-updated { background: #FF9800; color: white; }\n  </style>\n</head>\n<body>\n  <div class=\"header\">\n    <h1>📚 Weekly RAG Document Update Report</h1>\n    <p>Crawl completed on ${new Date(results.timestamp).toLocaleString()}</p>\n  </div>\n  \n  <div class=\"content\">\n`;\n\n// Statistics section\nemailBody += `\n    <div class=\"section stats\">\n      <div class=\"stats-item\">\n        <div class=\"stats-number\">${results.new_documents.length}</div>\n        <div>New Documents</div>\n      </div>\n      <div class=\"stats-item\">\n        <div class=\"stats-number\">${results.updated_documents.length}</div>\n        <div>Updated Documents</div>\n      </div>\n      <div class=\"stats-item\">\n        <div class=\"stats-number\">${results.unchanged_documents.length}</div>\n        <div>Unchanged</div>\n      </div>\n      <div class=\"stats-item\">\n        <div class=\"stats-number\">${results.failed_urls.length}</div>\n        <div>Failed</div>\n      </div>\n    </div>\n`;\n\n// New documents section\nif (results.new_documents.length > 0) {\n  emailBody += `\n    <div class=\"section\">\n      <h2 class=\"section-title\">📄 New Documents</h2>\n  `;\n  \n  results.new_documents.forEach(doc => {\n    emailBody += `\n      <div class=\"document\">\n        <div class=\"document-title\">\n          <span class=\"badge badge-new\">NEW</span>\n          ${doc.title}\n        </div>\n        <div class=\"document-url\">🔗 <a href=\"${doc.url}\">${doc.url}</a></div>\n    `;\n    \n    if (doc.sections && doc.sections.length > 0) {\n      emailBody += `\n        <div class=\"sections-list\">\n          <strong>Main Sections:</strong>\n          <ul>\n      `;\n      doc.sections.slice(0, 10).forEach(section => {\n        emailBody += `<li><strong>${section.heading}</strong></li>`;\n      });\n      if (doc.sections.length > 10) {\n        emailBody += `<li><em>... and ${doc.sections.length - 10} more sections</em></li>`;\n      }\n      emailBody += `\n          </ul>\n        </div>\n      `;\n    }\n    \n    emailBody += `\n      </div>\n    `;\n  });\n  \n  emailBody += `\n    </div>\n  `;\n}\n\n// Updated documents section\nif (results.updated_documents.length > 0) {\n  emailBody += `\n    <div class=\"section\">\n      <h2 class=\"section-title\">🔄 Updated Documents</h2>\n  `;\n  \n  results.updated_documents.forEach(doc => {\n    emailBody += `\n      <div class=\"document\">\n        <div class=\"document-title\">\n          <span class=\"badge badge-updated\">UPDATED</span>\n          ${doc.title}\n        </div>\n        <div class=\"document-url\">🔗 <a href=\"${doc.url}\">${doc.url}</a></div>\n    `;\n    \n    if (doc.sections && doc.sections.length > 0) {\n      emailBody += `\n        <div class=\"sections-list\">\n          <strong>Current Sections:</strong>\n          <ul>\n      `;\n      doc.sections.slice(0, 10).forEach(section => {\n        emailBody += `<li><strong>${section.heading}</strong></li>`;\n      });\n      if (doc.sections.length > 10) {\n        emailBody += `<li><em>... and ${doc.sections.length - 10} more sections</em></li>`;\n      }\n      emailBody += `\n          </ul>\n        </div>\n      `;\n    }\n    \n    emailBody += `\n      </div>\n    `;\n  });\n  \n  emailBody += `\n    </div>\n  `;\n}\n\n// Failed URLs section\nif (results.failed_urls.length > 0) {\n  emailBody += `\n    <div class=\"section\">\n      <h2 class=\"section-title\">⚠️ Failed URLs</h2>\n      <ul>\n  `;\n  results.failed_urls.forEach(url => {\n    emailBody += `<li>${url}</li>`;\n  });\n  emailBody += `\n      </ul>\n    </div>\n  `;\n}\n\n// No updates message\nif (!hasUpdates && results.failed_urls.length === 0) {\n  emailBody += `\n    <div class=\"section\">\n      <p style=\"text-align: center; font-size: 1.2em; color: #666;\">\n        ✅ All documents are up to date. No changes detected this week.\n      </p>\n    </div>\n  `;\n}\n\nemailBody += `\n  </div>\n  \n  <div class=\"footer\">\n    <p>This is an automated report from the RAG Learning Document Crawler</p>\n    <p>Configured URLs: ${results.new_documents.length + results.updated_documents.length + results.unchanged_documents.length + results.failed_urls.length}</p>\n  </div>\n</body>\n</html>\n`;\n\n// Return formatted data for email node\nreturn {\n  hasUpdates: hasUpdates,\n  emailSubject: hasUpdates \n    ? `[RAG Learning] Weekly Update: ${results.new_documents.length} New, ${results.updated_documents.length} Updated`\n    : '[RAG Learning] Weekly Update: No Changes',\n  emailBody: emailBody,\n  timestamp: results.timestamp,\n  stats: {\n    new: results.new_documents.length,\n    updated: results.updated_documents.length,\n    unchanged: results.unchanged_documents.length,\n    failed: results.failed_urls.length\n  }\n};"
+      },
+      "name": "Format Email Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.hasUpdates }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Check If Has Updates",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "smtp",
+        "fromEmail": "crawler@example.com",
+        "toEmail": "team@example.com",
+        "subject": "={{ $json.emailSubject }}",
+        "emailType": "html",
+        "message": "={{ $json.emailBody }}"
+      },
+      "name": "Send Email - With Updates",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        200
+      ],
+      "notes": "Configure SMTP settings here"
+    },
+    {
+      "parameters": {
+        "authentication": "smtp",
+        "fromEmail": "crawler@example.com",
+        "toEmail": "team@example.com",
+        "subject": "={{ $json.emailSubject }}",
+        "emailType": "html",
+        "message": "={{ $json.emailBody }}"
+      },
+      "name": "Send Email - No Updates",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        400
+      ],
+      "notes": "Send summary even when no updates"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger - Every Monday 9am": {
+      "main": [
+        [
+          {
+            "node": "Run Crawler Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Crawler Script": {
+      "main": [
+        [
+          {
+            "node": "Read Crawl Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Crawl Results": {
+      "main": [
+        [
+          {
+            "node": "Format Email Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Email Content": {
+      "main": [
+        [
+          {
+            "node": "Check If Has Updates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If Has Updates": {
+      "main": [
+        [
+          {
+            "node": "Send Email - With Updates",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Email - No Updates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-16T00:00:00.000Z",
+  "versionId": "1"
+}

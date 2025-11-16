@@ -1,0 +1,23 @@
+{
+  "urls": [
+    "https://python.langchain.com/docs/tutorials/rag/",
+    "https://docs.llamaindex.ai/en/stable/getting_started/starter_example.html",
+    "https://www.pinecone.io/learn/retrieval-augmented-generation/",
+    "https://huggingface.co/blog/rag",
+    "https://blog.langchain.dev/deconstructing-rag/"
+  ],
+  "output_dir": "data/crawled_docs",
+  "state_file": "automation/crawler/crawler_state.json",
+  "crawl_settings": {
+    "timeout": 30,
+    "retry_count": 3,
+    "delay_between_requests": 2
+  },
+  "email_recipients": [
+    "team@example.com"
+  ],
+  "email_settings": {
+    "subject_prefix": "[RAG Learning] Weekly Document Update",
+    "from_name": "RAG Crawler Bot"
+  }
+}

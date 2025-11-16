@@ -22,6 +22,9 @@ markdown==3.5.2
 unstructured==0.12.0
 python-magic==0.4.27
 
+# Web Scraping & Crawling
+requests==2.31.0
+
 # Utilities
 python-dotenv==1.0.0
 numpy==1.24.3
