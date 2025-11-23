@@ -1,0 +1,37 @@
+# Core Dependencies
+sentence-transformers>=2.2.0
+chromadb>=0.4.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# API Framework
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Web Interface
+streamlit>=1.28.0
+
+# Document Processing
+pypdf2>=3.0.0
+python-docx>=0.8.11
+beautifulsoup4>=4.12.0
+markdown>=3.4.0
+
+# Search Enhancement
+rank-bm25>=0.2.2
+
+# Re-ranking (optional, for better results)
+# cross-encoder models are included in sentence-transformers
+
+# Utilities
+python-multipart>=0.0.6
+aiofiles>=23.0.0
+tqdm>=4.65.0
+
+# Testing
+pytest>=7.0.0
+httpx>=0.24.0
+
+# Optional: OpenAI embeddings
+# openai>=1.0.0

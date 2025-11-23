@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Introduction to Python Programming",
+    "content": "Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum and first released in 1991, Python has become one of the most popular programming languages in the world. Python emphasizes code readability with its notable use of significant whitespace. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+    "metadata": {"category": "programming", "level": "beginner", "language": "python"}
+  },
+  {
+    "title": "Machine Learning Fundamentals",
+    "content": "Machine learning is a subset of artificial intelligence that provides systems the ability to automatically learn and improve from experience without being explicitly programmed. The process begins with observations or data, such as examples, direct experience, or instruction, to look for patterns in data and make better decisions in the future. The primary aim is to allow computers to learn automatically without human intervention or assistance and adjust actions accordingly.",
+    "metadata": {"category": "AI", "level": "intermediate", "topic": "machine_learning"}
+  },
+  {
+    "title": "Deep Learning and Neural Networks",
+    "content": "Deep learning is a class of machine learning algorithms that uses multiple layers to progressively extract higher-level features from the raw input. In image recognition, lower layers may identify edges, while higher layers may identify the concepts relevant to a human such as digits or letters or faces. Neural networks are computing systems inspired by biological neural networks that constitute animal brains. These systems learn to perform tasks by considering examples, generally without being programmed with task-specific rules.",
+    "metadata": {"category": "AI", "level": "advanced", "topic": "deep_learning"}
+  },
+  {
+    "title": "Natural Language Processing Overview",
+    "content": "Natural Language Processing (NLP) is a branch of artificial intelligence that helps computers understand, interpret, and manipulate human language. NLP draws from many disciplines, including computer science and computational linguistics, in its pursuit to fill the gap between human communication and computer understanding. Common NLP tasks include text classification, named entity recognition, sentiment analysis, machine translation, and question answering systems.",
+    "metadata": {"category": "AI", "level": "intermediate", "topic": "nlp"}
+  },
+  {
+    "title": "Vector Databases Explained",
+    "content": "Vector databases are a type of database that stores data as high-dimensional vectors. These vectors are mathematical representations of features or attributes of the data. The primary operation in vector databases is similarity search, where you find the vectors most similar to a query vector. Vector databases are essential for applications involving embeddings, such as semantic search, recommendation systems, and image similarity search. Popular vector databases include Pinecone, Weaviate, Qdrant, and ChromaDB.",
+    "metadata": {"category": "databases", "level": "intermediate", "topic": "vector_db"}
+  },
+  {
+    "title": "Embeddings in AI Systems",
+    "content": "Embeddings are dense vector representations of data where similar items are mapped to nearby points in a continuous vector space. In natural language processing, word embeddings capture semantic relationships between words. Sentence embeddings extend this concept to represent entire sentences or documents. Embeddings are created by training neural networks on large datasets, allowing the model to learn meaningful representations. They are fundamental to modern AI systems including search engines, recommendation systems, and chatbots.",
+    "metadata": {"category": "AI", "level": "intermediate", "topic": "embeddings"}
+  },
+  {
+    "title": "RESTful API Design Principles",
+    "content": "REST (Representational State Transfer) is an architectural style for designing networked applications. RESTful APIs use HTTP requests to perform CRUD operations (Create, Read, Update, Delete) on resources. Key principles include statelessness, where each request contains all information needed to process it, and the use of standard HTTP methods like GET, POST, PUT, and DELETE. Good REST API design involves clear URL structures, proper use of HTTP status codes, and consistent data formats like JSON.",
+    "metadata": {"category": "web_development", "level": "intermediate", "topic": "api"}
+  },
+  {
+    "title": "Data Science with Pandas",
+    "content": "Pandas is a powerful Python library for data manipulation and analysis. It provides data structures like DataFrame and Series that make it easy to work with structured data. Key features include reading and writing data from various formats (CSV, Excel, SQL), data cleaning and preprocessing, handling missing data, merging and joining datasets, and performing statistical analysis. Pandas integrates well with other libraries like NumPy, Matplotlib, and scikit-learn.",
+    "metadata": {"category": "data_science", "level": "intermediate", "language": "python"}
+  },
+  {
+    "title": "Docker Containerization",
+    "content": "Docker is a platform for developing, shipping, and running applications in containers. Containers are lightweight, standalone packages that include everything needed to run a piece of software, including the code, runtime, system tools, libraries, and settings. Docker allows developers to package applications with all their dependencies and deploy them consistently across different environments. Key concepts include Dockerfiles for building images, Docker Compose for multi-container applications, and Docker Hub for sharing images.",
+    "metadata": {"category": "devops", "level": "intermediate", "topic": "containers"}
+  },
+  {
+    "title": "Git Version Control",
+    "content": "Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency. It allows multiple developers to work together on the same codebase, tracking changes and managing different versions of the code. Key Git concepts include repositories, branches, commits, merging, and pull requests. Git integrates with platforms like GitHub, GitLab, and Bitbucket for collaboration and code hosting.",
+    "metadata": {"category": "tools", "level": "beginner", "topic": "version_control"}
+  }
+]
