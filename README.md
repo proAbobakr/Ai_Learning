@@ -1,6 +1,62 @@
-# RAG (Retrieval-Augmented Generation) - Zero to Hero Course
+# AI Learning Hub
 
-Welcome to the comprehensive RAG learning guide! This course takes you from complete beginner to advanced practitioner in building RAG systems.
+Welcome to the comprehensive AI/ML learning repository! This hub contains multiple courses designed to take you from beginner to advanced practitioner in various AI domains.
+
+---
+
+## Available Courses
+
+### 1. RAG (Retrieval-Augmented Generation) - Zero to Hero
+| Duration | Level | Focus |
+|----------|-------|-------|
+| 10 weeks | Beginner to Advanced | Building RAG systems |
+
+Build RAG systems from scratch, covering vector databases, embeddings, retrieval strategies, and production deployment.
+
+**Quick Links:** [Course Content](#rag-course-content) | [Quick Start](./QUICKSTART.md) | [Timeline](./LEARNING_TIMELINE.md)
+
+---
+
+### 2. Advanced NLP - From Fundamentals to Frontier Models
+| Duration | Level | Focus |
+|----------|-------|-------|
+| 14 weeks | Intermediate to Advanced | Comprehensive NLP |
+
+Comprehensive NLP curriculum covering everything from word embeddings to modern LLMs, transformers, RLHF, agents, and multilingual NLP. Based on CMU 11-711 and UMass CS 685.
+
+**Topics Covered:**
+- Word Representations & Language Modeling
+- RNNs, LSTMs, Transformers & Attention
+- Text Generation & Prompt Engineering
+- Instruction Tuning & LoRA/PEFT
+- Retrieval-Augmented Generation
+- RLHF & Direct Preference Optimization
+- Mechanistic Interpretability
+- LLM Agents & Tool Use
+- Chain-of-Thought Reasoning
+- Multilingual NLP & Cross-lingual Transfer
+
+**Quick Links:** [Start NLP Course](./nlp-course/README.md) | [NLP Timeline](./nlp-course/NLP_LEARNING_TIMELINE.md)
+
+---
+
+## Course Comparison
+
+| Aspect | RAG Course | NLP Course |
+|--------|------------|------------|
+| **Duration** | 10 weeks | 14 weeks |
+| **Prerequisites** | Python basics, ML fundamentals | Python, ML basics, Linear Algebra |
+| **Focus** | Production RAG systems | Theoretical + Practical NLP |
+| **Best For** | Engineers building RAG apps | Researchers, ML Engineers |
+| **Key Outcome** | Deploy RAG systems | Full NLP understanding |
+
+---
+
+# RAG Course Content
+
+## RAG (Retrieval-Augmented Generation) - Zero to Hero Course
+
+This course takes you from complete beginner to advanced practitioner in building RAG systems.
 
 ## 📚 What is RAG?
 
